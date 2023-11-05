@@ -263,4 +263,84 @@
     }
   });
 
+
+
+
+  /**
+   * Gallery isotope and filter
+   */
+  window.addEventListener('load', () => {
+    let galelryContainer = select('.gallery-container');
+    if (galelryContainer) {
+      let galleryIsotope = new Isotope(galelryContainer, {
+        itemSelector: '.gallery-item',
+      });
+
+      let galleryFilters = select('#gallery-flters li', true);
+
+      on('click', '#gallery-flters li', function(e) {
+        e.preventDefault();
+        galleryFilters.forEach(function(el) {
+          el.classList.remove('filter-active');
+        });
+        this.classList.add('filter-active');
+
+        galleryIsotope.arrange({
+          filter: this.getAttribute('data-filter')
+        });
+
+      }, true);
+    }
+
+  });
+
+
+
+
+  /**
+   * Initiate glightbox 
+   */
+  const glightbox = GLightbox({
+    selector: '.glightbox'
+  });
+
+
+
+
+
+
+
+  /**
+  * Init swiper slider with 3 slides at once in desktop view
+  */
+ new Swiper('.slides-3', {
+   speed: 600,
+   loop: true,
+   autoplay: {
+     delay: 5000,
+     disableOnInteraction: false
+   },
+   slidesPerView: 'auto',
+   pagination: {
+     el: '.swiper-pagination',
+     type: 'bullets',
+     clickable: true
+   },
+   navigation: {
+     nextEl: '.swiper-button-next',
+     prevEl: '.swiper-button-prev',
+   },
+   breakpoints: {
+     320: {
+       slidesPerView: 1,
+       spaceBetween: 40
+     },
+
+     1200: {
+       slidesPerView: 3,
+     }
+   }
+ });
+  
+
 })()
